@@ -1,8 +1,8 @@
 {
   "name": "tool-exchange-ang15",
   "version": "0.0.0",
-  "description": "Библиотека для обмена данными и функционалом",
-  "author": "Vladimir Kurguzov <kurguzov74@gmail.com>",
+    "description": "Библиотека для обмена данными и функционалом",
+    "author": "Vladimir Kurguzov <kurguzov74@gmail.com>",
   "peerDependencies": {
     "@angular/common": "^15.2.0",
     "@angular/core": "^15.2.0"
