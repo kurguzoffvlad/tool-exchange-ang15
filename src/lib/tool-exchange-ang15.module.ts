@@ -4,9 +4,9 @@ import {ToolExchangeAng15RoutingModule} from "./tool-exchange-ang15-routing.modu
 
 
 @NgModule({
-    declarations: [ToolExchangeAng15Component],
-    imports: [ToolExchangeAng15RoutingModule],
-    exports: [ToolExchangeAng15Component]
+	declarations: [ToolExchangeAng15Component],
+	imports: [ToolExchangeAng15RoutingModule],
+	exports: [ToolExchangeAng15Component]
 })
 export class ToolExchangeAng15Module {
 }

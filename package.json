@@ -1,14 +1,14 @@
 {
-  "name": "tool-exchange-ang15",
-  "version": "0.0.11",
-  "description": "Библиотека для обмена данными и функционалом",
-  "author": "Vladimir Kurguzov <kurguzov74@gmail.com>",
-  "peerDependencies": {
-    "@angular/common": "^15.2.0",
-    "@angular/core": "^15.2.0"
-  },
-  "dependencies": {
-    "tslib": "^2.3.0"
-  },
-  "sideEffects": false
+	"name": "tool-exchange-ang15",
+	"version": "0.0.13",
+	"description": "Библиотека для обмена данными и функционалом",
+	"author": "Vladimir Kurguzov <kurguzov74@gmail.com>",
+	"peerDependencies": {
+		"@angular/common": "^15.2.0",
+		"@angular/core": "^15.2.0"
+	},
+	"dependencies": {
+		"tslib": "^2.3.0"
+	},
+	"sideEffects": false
 }
