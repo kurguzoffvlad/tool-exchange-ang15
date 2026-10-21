@@ -1,6 +1,6 @@
-import {NgModule} from '@angular/core';
-import {ToolExchangeAng15Component} from './tool-exchange-ang15.component';
-import {ToolExchangeAng15RoutingModule} from "./tool-exchange-ang15-routing.module";
+import { NgModule } from '@angular/core';
+import { ToolExchangeAng15Component } from './tool-exchange-ang15.component';
+import { ToolExchangeAng15RoutingModule } from "./tool-exchange-ang15-routing.module";
 
 
 @NgModule({

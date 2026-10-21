@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import {ToolExchangeAng15Component} from './tool-exchange-ang15.component';
+import { ToolExchangeAng15Component } from './tool-exchange-ang15.component';
 
 const routes: Routes = [
 	{
