@@ -110,7 +110,6 @@ export class ExchangeSubscribeComponent {
 			red(
 				'red',
 				'exchange',
-				'common',
 				`Подписка exchange (из ${exchangeSource.from}/NgExchangeSubscribeComponent) - у компонента ${this.extendsClassName} отсутствуют данные для изменения свойства`
 			);
 			return;
@@ -120,17 +119,14 @@ export class ExchangeSubscribeComponent {
 			red(
 				'green',
 				'exchange',
-				'common',
 				`Подписка exchange (из ${exchangeSource.from}/NgExchangeSubscribeComponent) - у компонента ${this.extendsClassName} свойство -  ${data.name} = ${data.value}`
 			);
 
-			// @ts-expect-error — динамический доступ к свойству по имени
-			this[data.name] = data.value;
+			(this as any)[data.name] = data.value;
 		} else if (isLogLocalhost) {
 			red(
 				'red',
 				'exchange',
-				'common',
 				`Подписка exchange (из ${exchangeSource.from}/NgExchangeSubscribeComponent) - у компонента ${this.extendsClassName} нет свойства - ${data.name}`
 			);
 		}
@@ -149,20 +145,17 @@ export class ExchangeSubscribeComponent {
 			red(
 				'red',
 				'exchange',
-				'common',
 				`Подписка exchange (из ${exchangeSource.from}/NgExchangeSubscribeComponent) - у компонента ${this.extendsClassName} отсутствуют данные для вызова метода`
 			);
 			return;
 		}
 
-		// @ts-expect-error — динамический доступ к члену компонента по имени
-		const method = this[data.name];
+		const method = (this as any)[data.name];
 
 		if (typeof method === 'function') {
 			red(
 				'green',
 				'exchange',
-				'common',
 				`Подписка exchange (из ${exchangeSource.from}/NgExchangeSubscribeComponent) - у компонента ${this.extendsClassName} метод - ${method.name} с аргументами `,
 				data.arguments
 			);
@@ -172,7 +165,6 @@ export class ExchangeSubscribeComponent {
 			red(
 				'red',
 				'exchange',
-				'common',
 				`Подписка exchange (из ${exchangeSource.from}/NgExchangeSubscribeComponent) - у компонента ${this.extendsClassName} нет метода - ${data.name}`
 			);
 		}
