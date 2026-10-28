@@ -1,6 +1,6 @@
 {
 	"name": "tool-exchange-ang15",
-	"version": "0.0.16",
+	"version": "0.0.17",
 	"description": "Библиотека для обмена данными и функционалом",
 	"author": "Vladimir Kurguzov <kurguzov74@gmail.com>",
 	"peerDependencies": {

@@ -3,7 +3,7 @@ import { Component, Inject } from '@angular/core';
 import { Subject, } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { isLogLocalhost, red } from 'tool-log';
+import { green, isLogLocalhost, red } from 'tool-log';
 
 import { exchangeNameEnum, IAction, IChangeProperty, IExchangeSource, TNullable } from './exchange.interface';
 import { ExchangeValidators } from './exchange-validators';
@@ -50,10 +50,6 @@ export class ExchangeSubscribeComponent {
 		this.exchange.lighthouse$
 			.pipe(takeUntil(this.destroyedExchange$))
 			.subscribe((value: TNullable<IExchangeSource>) => {
-				// if (!value?.source) {
-				//     throw new Error(`Для работы с this.exchangeSource$ укажите для него адресат и ресурс`);
-				// }
-
 				if (
 					this.extendsClassName
 					&& value?.to
@@ -69,11 +65,9 @@ export class ExchangeSubscribeComponent {
 					].includes(value.source.name)) {
 						this.executeExchange(value.source.name, JSON.parse(JSON.stringify(value)));
 					}
-				} else if (value?.to) {
+				} else if (value && (value?.to === null || value?.to === undefined)) {
 					red(
-						'red',
 						'exchange',
-						'common',
 						'Подписка exchange (из' + value.from + '/NgExchangeSubscribeComponent) - Адресат отсутствует - ',
 						value?.to
 					);
@@ -108,16 +102,15 @@ export class ExchangeSubscribeComponent {
 
 		if (!data) {
 			red(
-				'red',
 				'exchange',
 				`Подписка exchange (из ${exchangeSource.from}/NgExchangeSubscribeComponent) - у компонента ${this.extendsClassName} отсутствуют данные для изменения свойства`
 			);
 			return;
 		}
 
+
 		if (Object.keys(this).includes(data.name)) {
-			red(
-				'green',
+			green(
 				'exchange',
 				`Подписка exchange (из ${exchangeSource.from}/NgExchangeSubscribeComponent) - у компонента ${this.extendsClassName} свойство -  ${data.name} = ${data.value}`
 			);
@@ -125,7 +118,6 @@ export class ExchangeSubscribeComponent {
 			(this as any)[data.name] = data.value;
 		} else if (isLogLocalhost) {
 			red(
-				'red',
 				'exchange',
 				`Подписка exchange (из ${exchangeSource.from}/NgExchangeSubscribeComponent) - у компонента ${this.extendsClassName} нет свойства - ${data.name}`
 			);
@@ -143,7 +135,6 @@ export class ExchangeSubscribeComponent {
 
 		if (!data) {
 			red(
-				'red',
 				'exchange',
 				`Подписка exchange (из ${exchangeSource.from}/NgExchangeSubscribeComponent) - у компонента ${this.extendsClassName} отсутствуют данные для вызова метода`
 			);
@@ -153,8 +144,7 @@ export class ExchangeSubscribeComponent {
 		const method = (this as any)[data.name];
 
 		if (typeof method === 'function') {
-			red(
-				'green',
+			green(
 				'exchange',
 				`Подписка exchange (из ${exchangeSource.from}/NgExchangeSubscribeComponent) - у компонента ${this.extendsClassName} метод - ${method.name} с аргументами `,
 				data.arguments
@@ -163,7 +153,6 @@ export class ExchangeSubscribeComponent {
 			method.apply(this, data.arguments);
 		} else if (isLogLocalhost) {
 			red(
-				'red',
 				'exchange',
 				`Подписка exchange (из ${exchangeSource.from}/NgExchangeSubscribeComponent) - у компонента ${this.extendsClassName} нет метода - ${data.name}`
 			);

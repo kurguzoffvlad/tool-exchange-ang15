@@ -45,7 +45,7 @@ export class ExchangeValidators {
 		if (!destroy || !String(destroy).includes('super.ngOnDestroy()')) {
 			const errorText = !destroy ? textDestroy : textSuper;
 
-			red('checkLogNgOnDestroy - ' + self);
+			red('checkLogNgOnDestroy - ', self);
 			throw new Error(errorText);
 		}
 	}

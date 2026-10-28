@@ -32,7 +32,7 @@ export class ExchangeLighthouse {
 	public send$(value: IExchangeSource, from: string = 'Не указано'): void {
 		if (!value) { return; }
 
-		green(' --- Отправлено из ' + from + ' через BaseLighthouse для exchange ' + value);
+		green(' --- Отправлено из ' + from + ' через ExchangeLighthouse ' + JSON.stringify(value));
 
 		this.lighthouse$.next(value);
 	}
