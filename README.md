@@ -1,24 +1,93 @@
-# ToolExchangeAng15
+```markdown
+# tool-exchange-ang15
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
+Библиотека для обмена данными и функционалом между компонентами и сервисами Angular 15.
 
-## Code scaffolding
+## Установка
 
-Run `ng generate component component-name --project tool-exchange-ang15` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project tool-exchange-ang15`.
-> Note: Don't forget to add `--project tool-exchange-ang15` or else it will be added to the default project in your `angular.json` file.
+```bash
+npm install tool-exchange-ang15
+```
 
-## Build
+Требуемые peer-зависимости:
+- `@angular/common` ^15.2.0
+- `@angular/core` ^15.2.0
+- `tool-log` ^0.0.18
 
-Run `ng build tool-exchange-ang15` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Возможности
 
-## Publishing
+- `ExchangeLighthouse` — сервис-«маяк» для отправки сообщений.
+- `ExchangeSubscribeComponent` — базовый компонент для подписки на сообщения.
+- Типы обмена: `ChangeProperty` (изменение свойства) и `RunAction` (вызов метода).
 
-After building your library with `ng build tool-exchange-ang15`, go to the dist folder `cd dist/tool-exchange-ang15` and run `npm publish`.
+## Использование
 
-## Running unit tests
+### Отправка сообщения
 
-Run `ng test tool-exchange-ang15` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```ts
+import { ExchangeLighthouse, exchangeNameEnum } from 'tool-exchange-ang15';
 
-## Further help
+constructor(private exchange: ExchangeLighthouse) {}
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+this.exchange.send$(
+  {
+    from: 'MyService',
+    to: 'MyComponent',
+    source: {
+      name: exchangeNameEnum.ChangeProperty,
+      data: { name: 'title', value: 'Новый заголовок' },
+    },
+  },
+  'MyService'
+);
+```
+
+### Подписка в компоненте
+
+```ts
+import { Component, OnDestroy } from '@angular/core';
+import { ExchangeSubscribeComponent, exchangeNameEnum } from 'tool-exchange-ang15';
+
+@Component({ ... })
+export class MyComponent extends ExchangeSubscribeComponent implements OnDestroy {
+  static readonly extendsClassName = 'MyComponent';
+
+  constructor(exchange: ExchangeLighthouse) {
+    super(MyComponent.extendsClassName, exchange);
+  }
+
+  ngOnDestroy(): void {
+    super.ngOnDestroy();
+  }
+}
+```
+
+> `extendsClassName` должен совпадать с именем класса. В `ngOnDestroy` обязательно вызывать `super.ngOnDestroy()`.
+
+### Адресация
+
+- `to: 'MyComponent'` — конкретный компонент
+- `to: 'forAllClasses'` — все подписчики
+- `to: ['A', 'B']` — несколько адресатов
+
+## Сборка
+
+```bash
+ng build tool-exchange-ang15
+```
+
+Артефакты — в `dist/tool-exchange-ang15`.
+
+## Публикация
+
+```bash
+cd dist/tool-exchange-ang15
+npm publish
+```
+
+## Тесты
+
+```bash
+ng test tool-exchange-ang15
+```
+```
