@@ -11,17 +11,18 @@ import { green } from 'tool-log';
  *
  * @example
  * // Пример использования:
- * this.exchange.send$({name: 'white'}({
- *            from: 'UserSeEvoLoaderComponent',
- *            to: ['EvoRootLighthousesComponent'],
- *            source: {
- *                 name: exchangeNameEnum.ChangeProperty,
- *                        data: {
- *                             name: 'exchChangeText',
- *                             arguments: ['Текст из родительского компонента переданный через систему exchange!!!'],
- *                         }
- *            }
- *         });
+ * const exchange = new ExchangeLighthouse();
+ *
+ * exchange.send$(
+ *      {
+ *          name: exchangeNameEnum.ChangeProperty,
+ *          data: {
+ *              name: 'exchChangeText',
+ *              arguments: ['Текст из родительского компонента переданный через систему exchange!!!'],
+ *          },
+ *      },
+ *      'UserSeEvoLoaderComponent',
+ * );
  */
 @Injectable({
 	providedIn: 'root'
