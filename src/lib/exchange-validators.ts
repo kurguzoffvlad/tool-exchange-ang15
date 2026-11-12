@@ -50,5 +50,16 @@ export class ExchangeValidators {
 		}
 	}
 
+	/**
+	 * Проверяет, что имя метода/свойства начинается с "exch_".
+	 * @throws {Error} Если префикс отсутствует.
+	 */
+	public checkLogExchPrefix(self: any, name: string): void {
+		if (!name || !name.startsWith('exch_')) {
+			red('checkLogExchPrefix - ', self?.constructor?.name, ' name: ', name);
+			throw new Error(`Имя "${name}" должно начинаться с "exch_"`);
+		}
+	}
+
 	//endregion
 }

@@ -108,6 +108,7 @@ export class ExchangeSubscribeComponent {
 			return;
 		}
 
+		this._checkExchange.checkLogExchPrefix(this, data.name);
 
 		if (Object.keys(this).includes(data.name)) {
 			green(
@@ -140,6 +141,8 @@ export class ExchangeSubscribeComponent {
 			);
 			return;
 		}
+
+		this._checkExchange.checkLogExchPrefix(this, data.name);
 
 		const method = (this as any)[data.name];
 
