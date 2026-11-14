@@ -1,6 +1,3 @@
-# Актуализированный README.md
-
-```markdown
 # tool-exchange-ang15
 
 Библиотека для обмена данными и функционалом между компонентами и сервисами Angular 15.
@@ -172,4 +169,3 @@ ng test tool-exchange-ang15
 - Angular 15.2+
 - TypeScript (совместимый с Angular 15)
 - `tool-log` ^0.0.18
-```
