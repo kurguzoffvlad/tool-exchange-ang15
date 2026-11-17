@@ -1,5 +1,7 @@
 # tool-exchange-ang15
 
+## Использование в https://github.com/kurguzoffvlad/tool-libs-ang15
+
 Библиотека для обмена данными и функционалом между компонентами и сервисами Angular 15.
 
 ## Установка
