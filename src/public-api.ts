@@ -5,4 +5,6 @@
 export * from './lib/exchange.interface';
 export * from './lib/exchange-lighthouse';
 export * from './lib/exchange-subscribe.component';
+export * from './lib/post-message/exchange-post-message.interface';
+export * from './lib/post-message/exchange-post-message.service';
 export * from './lib/tool-exchange-ang15.module';

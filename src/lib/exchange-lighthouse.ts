@@ -17,7 +17,7 @@ import { green } from 'tool-log';
  *      {
  *          name: exchangeNameEnum.ChangeProperty,
  *          data: {
- *              name: 'exchChangeText',
+ *              name: 'exch_exchChangeText',
  *              arguments: ['Текст из родительского компонента переданный через систему exchange!!!'],
  *          },
  *      },
