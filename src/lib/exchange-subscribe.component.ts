@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 
-import { Subject, } from 'rxjs';
+import { catchError, EMPTY, Subject, } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { green, isLogLocalhost, red } from 'tool-log';
@@ -48,7 +48,20 @@ export class ExchangeSubscribeComponent {
 	/** Подписываемся на изменения в evo.exchange.lighthouse$ (Обменный пункт) */
 	private _subscribeActions(): void {
 		this.exchange.lighthouse$
-			.pipe(takeUntil(this.destroyedExchange$))
+			.pipe(
+				// Страховка от ошибок, возникших ДО subscribe (в самом потоке или
+				// в будущих операторах цепочки). ВНИМАНИЕ: catchError завершает
+				// исходный поток и подменяет его на EMPTY — то есть после первой
+				// такой ошибки подписка на lighthouse$ всё равно умрёт. Основную
+				// защиту от ошибок конкретного сообщения даёт try/catch ниже.
+				catchError((error) => {
+					console.error(
+						`Подписка exchange (${this.extendsClassName}) - ошибка в потоке lighthouse$:`, error
+					);
+					return EMPTY;
+				}),
+				takeUntil(this.destroyedExchange$)
+			)
 			.subscribe((value: TNullable<IExchangeSource>) => {
 				if (
 					this.extendsClassName
@@ -63,7 +76,16 @@ export class ExchangeSubscribeComponent {
 						exchangeNameEnum.ChangeProperty,
 						exchangeNameEnum.RunAction
 					].includes(value.source.name)) {
-						this.executeExchange(value.source.name, JSON.parse(JSON.stringify(value)));
+						// try/catch — единственный способ пережить ошибку конкретного
+						// сообщения и остаться подписанным на lighthouse$.
+						try {
+							this.executeExchange(value.source.name, JSON.parse(JSON.stringify(value)));
+						} catch (error) {
+							console.error(
+								`Подписка exchange (из ${value.from}/NgExchangeSubscribeComponent) - ошибка при обработке сообщения у компонента ${this.extendsClassName}:`,
+								error
+							);
+						}
 					}
 				} else if (value && (value?.to === null || value?.to === undefined)) {
 					red(
