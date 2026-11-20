@@ -1,5 +1,3 @@
-import { IExchangeSource } from '../exchange.interface';
-
 /**
  * Маркер, по которому распознаются сообщения библиотеки tool-exchange-ang15.
  * Позволяет игнорировать посторонние postMessage-сообщения.
@@ -9,12 +7,12 @@ export const EXCHANGE_POST_MESSAGE_MARKER = '__toolExchange__';
 /**
  * Конверт сообщения, передаваемого через window.postMessage.
  */
-export interface IExchangePostMessageEnvelope {
+export interface IExchangePostMessageEnvelope<T = unknown> {
 	/** Маркер библиотеки. */
 	marker: typeof EXCHANGE_POST_MESSAGE_MARKER;
 
 	/** Полезная нагрузка — источник обмена. */
-	payload: IExchangeSource;
+	payload: T;
 }
 
 /**
