@@ -1,12 +1,12 @@
 {
 	"name": "tool-exchange-ang15",
-	"version": "0.0.26",
+	"version": "0.0.27",
 	"description": "Библиотека для обмена данными и функционалом",
 	"author": "Vladimir Kurguzov <kurguzov74@gmail.com>",
 	"peerDependencies": {
 		"@angular/common": "^15.2.0",
 		"@angular/core": "^15.2.0",
-		"tool-log": "^0.0.18"
+		"tool-log": "~0.0.18"
 	},
 	"dependencies": {
 		"tslib": "^2.3.0"
